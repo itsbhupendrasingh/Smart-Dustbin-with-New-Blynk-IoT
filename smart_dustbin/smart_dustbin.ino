@@ -24,10 +24,10 @@ int binLevel=0;
 void sendSensor()
 {
   int ir=digitalRead(34);
-  if(ir==HIGH)
+  if(ir==LOW)
   {    
     servo.write(90);
-    for(int i=0; i<50; i++)
+    for(int i=0; i<50; i++) // it will be open dustbin flap for 5 second
     {
       Blynk.virtualWrite(V2, 90);
       ultrasonic(); 
