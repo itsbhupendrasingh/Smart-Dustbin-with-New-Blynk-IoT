@@ -36,7 +36,7 @@ void sendSensor()
     servo.write(0);
     Blynk.virtualWrite(V2, 0);
   }
-  if(ir==LOW)
+  if(ir==HIGH)
   {
     
     ultrasonic();
