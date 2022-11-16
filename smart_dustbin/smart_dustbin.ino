@@ -4,14 +4,16 @@
  * if your want any soluiton related for any IoT Customized Boards and Sensor, 
  * then contact to www.nuttyengineer.com 
  */
-// Fill-in information from your Blynk Template here
+// Replace/ Fill-in information from your Blynk Template here
 
-#define BLYNK_TEMPLATE_ID "TMPL4yDpPzsU"
-#define BLYNK_DEVICE_NAME "Smart Dustbin"
+#define BLYNK_TEMPLATE_ID "TMPLZE103nhh"
+#define BLYNK_DEVICE_NAME "Smart dustbin"
 
 #define BLYNK_FIRMWARE_VERSION "0.1.0"
 #define BLYNK_PRINT Serial
 #include "BlynkEdgent.h"
+
+#define USE_WROVER_BOARD
 
 #define echoPin 32
 #define trigPin 33
@@ -24,10 +26,10 @@ int binLevel=0;
 void sendSensor()
 {
   int ir=digitalRead(34);
-  if(ir==LOW)
+  if(ir==HIGH)
   {    
     servo.write(90);
-    for(int i=0; i<50; i++) // it will be open dustbin flap for 5 second
+    for(int i=0; i<50; i++)
     {
       Blynk.virtualWrite(V2, 90);
       ultrasonic(); 
@@ -36,7 +38,7 @@ void sendSensor()
     servo.write(0);
     Blynk.virtualWrite(V2, 0);
   }
-  if(ir==HIGH)
+  if(ir==LOW)
   {
     
     ultrasonic();
@@ -45,6 +47,7 @@ void sendSensor()
 }
 void ultrasonic()
 {
+  Serial.println("Blynk.air updated");
     digitalWrite(trigPin, LOW);
     delayMicroseconds(2);
     digitalWrite(trigPin, HIGH);
